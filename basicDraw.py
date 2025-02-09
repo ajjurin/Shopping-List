@@ -55,10 +55,10 @@ def print_touch_coordinates(x, y):
 
 
 def map_coordinates(raw_x, raw_y):
-    # Swap X and Y coordinates
-    x = int(raw_y * SCREEN_WIDTH / TOUCH_HEIGHT)
-    y = int(raw_x * SCREEN_HEIGHT / TOUCH_WIDTH)
-    print(f"Raw touch: x={raw_x}, y={raw_y} => Swapped coordinates: x={x}, y={y}")
+    # Flip X axis
+    x = SCREEN_WIDTH - int(raw_x * SCREEN_WIDTH / TOUCH_WIDTH)
+    y = int(raw_y * SCREEN_HEIGHT / TOUCH_HEIGHT)
+    print(f"Raw touch: x={raw_x}, y={raw_y} => Mapped coordinates: x={x}, y={y}")
     x = max(0, min(x, SCREEN_WIDTH - 1))
     y = max(0, min(y, SCREEN_HEIGHT - 1))
     print(f"Clamped coordinates: x={x}, y={y}")
@@ -118,3 +118,4 @@ except KeyboardInterrupt:
     t1.join()
     epd.Dev_exit()
     exit()
+
